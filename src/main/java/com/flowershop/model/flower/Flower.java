@@ -38,4 +38,12 @@ public abstract class Flower {
     public int getFreshnessLevel() {
         return freshnessLevel;
     }
+
+    public abstract String getFlowerType();
+
+    @Override
+    public String toString() {
+        return String.format("%s [price=%.2f, length=%d см, freshness=%d]",
+                name, price, stemLength, freshnessLevel);
+    }
 }
