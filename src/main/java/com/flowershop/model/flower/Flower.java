@@ -22,4 +22,20 @@ public abstract class Flower {
         this.stemLength = stemLength;
         this.freshnessLevel = freshnessLevel;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getStemLength() {
+        return stemLength;
+    }
+
+    public int getFreshnessLevel() {
+        return freshnessLevel;
+    }
 }
