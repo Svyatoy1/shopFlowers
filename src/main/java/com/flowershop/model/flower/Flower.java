@@ -1,4 +1,7 @@
 package com.flowershop.model.flower;
+/*
+* abstract class Flower, basic for decorative and field flowers
+* */
 
 public abstract class Flower {
     private String name;
