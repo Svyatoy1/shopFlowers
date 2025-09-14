@@ -10,6 +10,8 @@ public class DecorativeFlower extends Flower {
         super(name, price, stemLength, freshnessLevel);
     }
 
+    // override for correct console output
+
     @Override public String getFlowerType() {
         return "DecorativeFlower";
     }

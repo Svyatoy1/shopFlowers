@@ -17,6 +17,8 @@ public class FieldFlower extends Flower {
         return bloomingSeason;
     }
 
+    // override for correct console output
+
     @Override
     public String getFlowerType(){
         return "FieldFlower (season: " + bloomingSeason + ")";
