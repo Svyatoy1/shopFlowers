@@ -1,4 +1,15 @@
 package com.flowershop.model.flower;
 
-public class DecorativeFlower {
+/*
+* decorative type from class Flower (tulip, rose etc.)
+* */
+
+public class DecorativeFlower extends Flower {
+    public DecorativeFlower(String name, double price, int stemLength, int freshnessLevel) {
+        super(name, price, stemLength, freshnessLevel);
+    }
+
+    @Override public String getFlowerType() {
+        return "DecorativeFlower";
+    }
 }
