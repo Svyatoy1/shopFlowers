@@ -43,9 +43,16 @@ public class BouquetService {
         return sortedFlowers;
     }
 
-    public List<Flower> findFlowersByStemLength(Bouquet bouquet) {
-        // to do
-        return List.of();
+    public List<Flower> findFlowersByStemLength(Bouquet bouquet, int min, int max) {
+        List<Flower> result = new ArrayList<>();
+
+        for (Flower flower : bouquet.getFlowers()) {
+            int length = flower.getStemLength();
+            if (length >= min && length <= max) {
+                result.add(flower);
+            }
+        }
+        return result;
     }
 
 }
