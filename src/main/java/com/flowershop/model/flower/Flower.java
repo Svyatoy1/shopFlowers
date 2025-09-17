@@ -46,7 +46,7 @@ public abstract class Flower {
 
     @Override
     public String toString() {
-        return String.format("%s [price=%.2f, length=%d см, freshness=%d]",
+        return String.format("%s [price=%.2f, length=%d cm, freshness=%d]",
                 name, price, stemLength, freshnessLevel);
     }
 }
