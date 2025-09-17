@@ -13,7 +13,8 @@ import com.flowershop.model.flower.Flower;
 
 import java.util.Comparator; // interface for comparing objects
 import java.util.List; // interface for saving lists
-import java.util.stream.Collectors; // for saving results in collection
+import java.util.ArrayList;
+import java.util.Collections; // we use cycles for creating methods, without streams
 
 public class BouquetService {
     public double getPrice(Bouquet bouquet) {
@@ -31,8 +32,15 @@ public class BouquetService {
     }
 
     public List<Flower> sortFlowersByFreshness(Bouquet bouquet) {
-        // to do
-        return List.of(); // temporary
+        List<Flower> sortedFlowers = new ArrayList<>(bouquet.getFlowers()); // creating copy of flower list
+
+        Collections.sort(sortedFlowers, new Comparator<Flower>() {
+            @Override
+            public int compare(Flower o1, Flower o2) {
+                return Integer.compare(o1.getFreshnessLevel(), o2.getFreshnessLevel());
+            }
+        });
+        return sortedFlowers;
     }
 
     public List<Flower> findFlowersByStemLength(Bouquet bouquet) {
