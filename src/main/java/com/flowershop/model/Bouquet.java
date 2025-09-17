@@ -12,7 +12,7 @@ public class Bouquet {
     private List<Flower> flowers;
     private List<Accessory> accessories;
 
-    public Bouquet {
+    public Bouquet() {
         this.flowers = new ArrayList<>();
         this.accessories = new ArrayList<>();
     }
