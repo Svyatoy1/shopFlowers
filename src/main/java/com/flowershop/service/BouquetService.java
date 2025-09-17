@@ -7,6 +7,7 @@ service for working with bouquets:
 - find flower by stem length
  */
 
+import com.flowershop.model.Accessory;
 import com.flowershop.model.Bouquet;
 import com.flowershop.model.flower.Flower;
 
@@ -16,8 +17,17 @@ import java.util.stream.Collectors; // for saving results in collection
 
 public class BouquetService {
     public double getPrice(Bouquet bouquet) {
-        // to do
-        return 0.0; // temporary
+        double total = 0.0;
+
+        for (Flower flower : bouquet.getFlowers()) {
+            total += flower.getPrice();
+        }
+
+        for (Accessory accessory : bouquet.getAccessories()) {
+            total += accessory.getPrice();
+        }
+
+        return total;
     }
 
     public List<Flower> sortFlowersByFreshness(Bouquet bouquet) {
