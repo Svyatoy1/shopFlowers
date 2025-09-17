@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections; // we use cycles for creating methods, without streams
 
 public class BouquetService {
-    public double getPrice(Bouquet bouquet) {
+    public double getTotalPrice(Bouquet bouquet) {
         double total = 0.0;
 
         for (Flower flower : bouquet.getFlowers()) {
