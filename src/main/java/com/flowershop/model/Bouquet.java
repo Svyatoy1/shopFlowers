@@ -17,6 +17,11 @@ public class Bouquet {
         this.accessories = new ArrayList<>();
     }
 
+    public Bouquet(List<Flower> flowers, List<Accessory> accessories) {
+        this.flowers = flowers;
+        this.accessories = accessories;
+    }
+
     public void addFlower(Flower flower) {
         flowers.add(flower);
     }
