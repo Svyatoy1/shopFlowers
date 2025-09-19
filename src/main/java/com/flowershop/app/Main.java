@@ -26,7 +26,7 @@ public class Main {
         // 2. sorting by freshness level
         System.out.println("\nFlowers after sorting by freshness level:");
         service.sortFlowersByFreshness(bouquet).forEach(f ->
-                System.out.println(f.getName() + "freshness level: " + f.getFreshnessLevel())
+                System.out.println(f.getName() + " freshness level: " + f.getFreshnessLevel())
         );
 
         // 3. find by stem length
