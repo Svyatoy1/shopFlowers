@@ -1,18 +1,14 @@
 package com.flowershop.model.flower;
 
-/*
-decorative type from class Flower (tulip, rose etc.)
-no additional info
-*/
+import java.time.LocalDate;
 
 public class DecorativeFlower extends Flower {
-    public DecorativeFlower(String name, double price, int stemLength, int freshnessLevel) {
-        super(name, price, stemLength, freshnessLevel);
+    public DecorativeFlower(String name, double price, int stemLength, LocalDate harvestDate, int shelfLifeDays) {
+        super(name, price, stemLength, harvestDate, shelfLifeDays);
     }
 
-    // override for correct console output
-
-    @Override public String getFlowerType() {
+    @Override
+    public String getFlowerType() {
         return "DecorativeFlower";
     }
 }

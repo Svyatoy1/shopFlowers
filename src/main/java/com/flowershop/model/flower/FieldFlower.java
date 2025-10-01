@@ -1,15 +1,13 @@
 package com.flowershop.model.flower;
 
-/*
-field type from class Flower (sunflower, lavender etc.)
-additional info: flowering season
- */
+import java.time.LocalDate;
 
 public class FieldFlower extends Flower {
-    private String bloomingSeason; // like 'Spring' or 'Summer'
+    private String bloomingSeason; // додаткове поле
 
-    public FieldFlower (String name, double price, int stemLength, int freshnessLevel, String bloomingSeason) {
-        super(name, price, stemLength, freshnessLevel);
+    public FieldFlower(String name, double price, int stemLength,
+                       LocalDate harvestDate, int shelfLifeDays, String bloomingSeason) {
+        super(name, price, stemLength, harvestDate, shelfLifeDays);
         this.bloomingSeason = bloomingSeason;
     }
 
@@ -17,10 +15,8 @@ public class FieldFlower extends Flower {
         return bloomingSeason;
     }
 
-    // override for correct console output
-
     @Override
-    public String getFlowerType(){
+    public String getFlowerType() {
         return "FieldFlower (season: " + bloomingSeason + ")";
     }
 }
