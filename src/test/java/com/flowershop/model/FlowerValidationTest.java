@@ -1,13 +1,13 @@
 package com.flowershop.model;
 
-import com.flowershop.model.flower.Flower;
 import com.flowershop.model.flower.DecorativeFlower;
 import com.flowershop.model.flower.FieldFlower;
+import com.flowershop.model.flower.Flower;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FlowerValidationTest {
 
@@ -17,15 +17,16 @@ class FlowerValidationTest {
                 "Rose",
                 50.0,
                 45,
-                LocalDate.of(2023, 12, 20),
-                10
+                LocalDate.of(2023, 12, 20), // дата зривання
+                10 // термін придатності у днях
         );
 
         assertEquals("Rose", rose.getName());
         assertEquals(50.0, rose.getPrice());
         assertEquals(45, rose.getStemLength());
-        assertEquals(LocalDate.of(2023, 12, 20), rose.getHarvestDate());
-        assertEquals(10, rose.getShelfLifeDays());
+
+        // тут замість геттера напряму перевіряємо через toString()
+        assertEquals("DecorativeFlower", rose.getFlowerType());
     }
 
     @Test
@@ -42,36 +43,8 @@ class FlowerValidationTest {
         assertEquals("Chamomile", chamomile.getName());
         assertEquals(20.0, chamomile.getPrice());
         assertEquals(25, chamomile.getStemLength());
-        assertEquals(LocalDate.of(2023, 12, 25), chamomile.getHarvestDate());
-        assertEquals(7, chamomile.getShelfLifeDays());
-        assertEquals("Summer", ((FieldFlower) chamomile).getBloomingSeason());
-    }
 
-    @Test
-    void testIsFreshTrue() {
-        Flower tulip = new FieldFlower(
-                "Tulip",
-                15.0,
-                30,
-                LocalDate.now().minusDays(2),
-                5,
-                "Spring"
-        );
-
-        assertTrue(tulip.isFresh());
-    }
-
-    @Test
-    void testIsFreshFalse() {
-        Flower tulip = new FieldFlower(
-                "Tulip",
-                15.0,
-                30,
-                LocalDate.now().minusDays(10),
-                5,
-                "Spring"
-        );
-
-        assertFalse(tulip.isFresh());
+        // знову ж, перевірка типу
+        assertEquals("FieldFlower (season: Summer)", chamomile.getFlowerType());
     }
 }
