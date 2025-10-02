@@ -48,6 +48,29 @@ public class Main {
                 );
             }
 
+            // ---- Виводимо склад букетів (JOIN) ----
+            System.out.println("\nBouquets full composition:");
+            String sql = """
+                    SELECT b.name AS bouquet, f.name AS flower, a.name AS accessory
+                    FROM bouquets b
+                    LEFT JOIN bouquet_flowers bf ON b.id = bf.bouquet_id
+                    LEFT JOIN flowers f ON bf.flower_id = f.id
+                    LEFT JOIN bouquet_accessories ba ON b.id = ba.bouquet_id
+                    LEFT JOIN accessories a ON ba.accessory_id = a.id
+                    ORDER BY b.id;
+                    """;
+
+            ResultSet rsJoin = stmt.executeQuery(sql);
+            while (rsJoin.next()) {
+                String bouquet = rsJoin.getString("bouquet");
+                String flower = rsJoin.getString("flower");
+                String accessory = rsJoin.getString("accessory");
+
+                System.out.println("Bouquet: " + bouquet +
+                        " | Flower: " + (flower != null ? flower : "-") +
+                        " | Accessory: " + (accessory != null ? accessory : "-"));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
