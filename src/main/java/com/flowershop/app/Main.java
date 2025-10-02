@@ -1,40 +1,55 @@
 package com.flowershop.app;
 
-import com.flowershop.model.Bouquet;
-import com.flowershop.model.Accessory;
-import com.flowershop.model.flower.FieldFlower;
-import com.flowershop.model.flower.DecorativeFlower;
-import com.flowershop.service.BouquetService;
+import com.flowershop.util.DatabaseConnection;
 
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) {
-        Bouquet bouquet = new Bouquet();
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            System.out.println("Connected to PostgreSQL!");
 
-        bouquet.addFlower(new DecorativeFlower("Rose", 80, 40, LocalDate.now().minusDays(1), 7));
-        bouquet.addFlower(new FieldFlower("Chamomile", 20, 25, LocalDate.now().minusDays(2), 5, "Summer"));
-        bouquet.addFlower(new DecorativeFlower("Tulip", 50, 30, LocalDate.now(), 4));
+            Statement stmt = conn.createStatement();
 
-        bouquet.addAccessory(new Accessory("Ribbon", 15));
-        bouquet.addAccessory(new Accessory("Wrapping paper", 25));
+            // ---- Виводимо квіти ----
+            System.out.println("\nFlowers:");
+            ResultSet rsFlowers = stmt.executeQuery("SELECT id, name, price, stem_length, harvest_date, shelf_life_days FROM flowers");
+            while (rsFlowers.next()) {
+                System.out.println(
+                        rsFlowers.getInt("id") + ". " +
+                                rsFlowers.getString("name") +
+                                " | price: " + rsFlowers.getDouble("price") +
+                                " | stem length: " + rsFlowers.getInt("stem_length") +
+                                " cm | harvested: " + rsFlowers.getDate("harvest_date") +
+                                " | shelf life: " + rsFlowers.getInt("shelf_life_days") + " days"
+                );
+            }
 
-        BouquetService service = new BouquetService();
+            // ---- Виводимо аксесуари ----
+            System.out.println("\nAccessories:");
+            ResultSet rsAcc = stmt.executeQuery("SELECT id, name, price FROM accessories");
+            while (rsAcc.next()) {
+                System.out.println(
+                        rsAcc.getInt("id") + ". " +
+                                rsAcc.getString("name") +
+                                " | price: " + rsAcc.getDouble("price")
+                );
+            }
 
-        // 1. total price
-        double totalPrice = service.getTotalPrice(bouquet);
-        System.out.println("Total price is " + totalPrice);
+            // ---- Виводимо букети ----
+            System.out.println("\nBouquets:");
+            ResultSet rsBouquets = stmt.executeQuery("SELECT id, name FROM bouquets");
+            while (rsBouquets.next()) {
+                System.out.println(
+                        rsBouquets.getInt("id") + ". " +
+                                rsBouquets.getString("name")
+                );
+            }
 
-        // 2. sorting by shelf life
-        System.out.println("\nFlowers after sorting by remaining shelf life:");
-        service.sortFlowersByFreshness(bouquet).forEach(f ->
-                System.out.println(f.getName() + " remaining days: " + f.getRemainingShelfLife())
-        );
-
-        // 3. find by stem length
-        System.out.println("\nFlowers with stem length 20 to 35 cm:");
-        service.findFlowersByStemLength(bouquet, 20, 35).forEach(f ->
-                System.out.println(f.getName() + " stem length: " + f.getStemLength() + " cm")
-        );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
